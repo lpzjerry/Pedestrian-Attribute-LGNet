@@ -1,0 +1,12 @@
+# Recorded afterwards, might not be the solver used in the original experiment.
+# Please finetune the learning rate and step values to replicate the result.
+
+base_lr: 0.02 # finetune expected
+weight_decay = 0.005
+gamma: 0.1
+momentum: 0.9
+lr_policy: "multistep"
+stepvalue: 5000 # dataset dependent
+stepvalue: 10000 # dataset dependent
+max_iter: 20000 # dataset dependent
+type: "SGD" # "Adam" also works well in RAP and PA-100K
