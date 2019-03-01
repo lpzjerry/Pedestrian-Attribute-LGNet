@@ -1,5 +1,6 @@
-#
-name: "Inception_v2"
+# Adapted from Inception-V2
+# Suggested visualization method: https://ethereon.github.io/netscope/#/editor
+name: "LGNet"
 layer{
   name: "data"
   type: "HumanAttData"
@@ -73,14 +74,8 @@ layer {
   }
 }
 layer {
-  name: "labels_gather"
-  bottom: "labels"
-  top: "labels_gather"
-  type: "Gather"
-}
-layer {
   name: "conv_conv1-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -100,7 +95,7 @@ layer {
 }
 layer {
   name: "bn_conv1-1-cam"
-  type: "BNData"
+  type: "BN"
   bottom: "conv_conv1-cam"
   top: "conv_conv1-a-cam"
   param {
@@ -152,7 +147,7 @@ layer {
 }
 layer {
   name: "conv_conv2red-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -172,7 +167,7 @@ layer {
 }
 layer {
   name: "bn_conv2red-1-cam"
-  type: "BNData"
+  type: "BN"
   bottom: "conv_conv2red-cam"
   top: "conv_conv2red-2-cam"
   param {
@@ -212,7 +207,7 @@ layer {
 }
 layer {
   name: "conv_conv2-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -232,7 +227,7 @@ layer {
 }
 layer {
   name: "bn_conv2-1-cam"
-  type: "BNData"
+  type: "BN"
   bottom: "conv_conv2-cam"
   top: "conv_conv2-2-cam"
   param {
@@ -284,7 +279,7 @@ layer {
 }
 layer {
   name: "conv_3a_1x1-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -303,8 +298,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3a_1x1-cam"
-  type: "BNData"
+  name: "BN_3a_1x1-cam"
+  type: "BN"
   bottom: "conv_3a_1x1-cam"
   top: "conv_3a_1x1-cam"
   param {
@@ -344,7 +339,7 @@ layer {
 }
 layer {
   name: "conv_3a_3x3_reduce-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -363,8 +358,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3a_3x3_reduce-cam"
-  type: "BNData"
+  name: "BN_3a_3x3_reduce-cam"
+  type: "BN"
   bottom: "conv_3a_3x3_reduce-cam"
   top: "conv_3a_3x3_reduce-cam"
   param {
@@ -404,7 +399,7 @@ layer {
 }
 layer {
   name: "conv_3a_3x3-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -423,8 +418,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3a_3x3-cam"
-  type: "BNData"
+  name: "BN_3a_3x3-cam"
+  type: "BN"
   bottom: "conv_3a_3x3-cam"
   top: "conv_3a_3x3-cam"
   param {
@@ -464,7 +459,7 @@ layer {
 }
 layer {
   name: "conv_3a_double_3x3_reduce-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -483,8 +478,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3a_double_3x3_reduce-cam"
-  type: "BNData"
+  name: "BN_3a_double_3x3_reduce-cam"
+  type: "BN"
   bottom: "conv_3a_double_3x3_reduce-cam"
   top: "conv_3a_double_3x3_reduce-cam"
   param {
@@ -524,7 +519,7 @@ layer {
 }
 layer {
   name: "conv_3a_double_3x3_0-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -543,8 +538,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3a_double_3x3_0-cam"
-  type: "BNData"
+  name: "BN_3a_double_3x3_0-cam"
+  type: "BN"
   bottom: "conv_3a_double_3x3_0-cam"
   top: "conv_3a_double_3x3_0-cam"
   param {
@@ -584,7 +579,7 @@ layer {
 }
 layer {
   name: "conv_3a_double_3x3_1-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -603,8 +598,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3a_double_3x3_1-cam"
-  type: "BNData"
+  name: "BN_3a_double_3x3_1-cam"
+  type: "BN"
   bottom: "conv_3a_double_3x3_1-cam"
   top: "conv_3a_double_3x3_1-cam"
   param {
@@ -656,7 +651,7 @@ layer {
 }
 layer {
   name: "conv_3a_proj-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -675,8 +670,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3a_proj-cam"
-  type: "BNData"
+  name: "BN_3a_proj-cam"
+  type: "BN"
   bottom: "conv_3a_proj-cam"
   top: "conv_3a_proj-cam"
   param {
@@ -725,7 +720,7 @@ layer {
 }
 layer {
   name: "conv_3b_1x1-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -744,8 +739,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3b_1x1-cam"
-  type: "BNData"
+  name: "BN_3b_1x1-cam"
+  type: "BN"
   bottom: "conv_3b_1x1-cam"
   top: "conv_3b_1x1-cam"
   param {
@@ -785,7 +780,7 @@ layer {
 }
 layer {
   name: "conv_3b_3x3_reduce-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -804,8 +799,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3b_3x3_reduce-cam"
-  type: "BNData"
+  name: "BN_3b_3x3_reduce-cam"
+  type: "BN"
   bottom: "conv_3b_3x3_reduce-cam"
   top: "conv_3b_3x3_reduce-cam"
  param {
@@ -845,7 +840,7 @@ layer {
 }
 layer {
   name: "conv_3b_3x3-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -864,8 +859,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3b_3x3-cam"
-  type: "BNData"
+  name: "BN_3b_3x3-cam"
+  type: "BN"
   bottom: "conv_3b_3x3-cam"
   top: "conv_3b_3x3-cam"
   param {
@@ -905,7 +900,7 @@ layer {
 }
 layer {
   name: "conv_3b_double_3x3_reduce-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -924,8 +919,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3b_double_3x3_reduce-cam"
-  type: "BNData"
+  name: "BN_3b_double_3x3_reduce-cam"
+  type: "BN"
   bottom: "conv_3b_double_3x3_reduce-cam"
   top: "conv_3b_double_3x3_reduce-cam"
   param {
@@ -965,7 +960,7 @@ layer {
 }
 layer {
   name: "conv_3b_double_3x3_0-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -984,8 +979,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3b_double_3x3_0-cam"
-  type: "BNData"
+  name: "BN_3b_double_3x3_0-cam"
+  type: "BN"
   bottom: "conv_3b_double_3x3_0-cam"
   top: "conv_3b_double_3x3_0-cam"
   param {
@@ -1025,7 +1020,7 @@ layer {
 }
 layer {
   name: "conv_3b_double_3x3_1-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -1044,8 +1039,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3b_double_3x3_1-cam"
-  type: "BNData"
+  name: "BN_3b_double_3x3_1-cam"
+  type: "BN"
   bottom: "conv_3b_double_3x3_1-cam"
   top: "conv_3b_double_3x3_1-cam"
   param {
@@ -1097,7 +1092,7 @@ layer {
 }
 layer {
   name: "conv_3b_proj-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -1116,8 +1111,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3b_proj-cam"
-  type: "BNData"
+  name: "BN_3b_proj-cam"
+  type: "BN"
   bottom: "conv_3b_proj-cam"
   top: "conv_3b_proj-cam"
   param {
@@ -1166,7 +1161,7 @@ layer {
 }
 layer {
   name: "conv_3c_3x3_reduce-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -1185,8 +1180,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3c_3x3_reduce-cam"
-  type: "BNData"
+  name: "BN_3c_3x3_reduce-cam"
+  type: "BN"
   bottom: "conv_3c_3x3_reduce-cam"
   top: "conv_3c_3x3_reduce-cam"
   param {
@@ -1226,7 +1221,7 @@ layer {
 }
 layer {
   name: "conv_3c_3x3-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -1245,8 +1240,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3c_3x3-cam"
-  type: "BNData"
+  name: "BN_3c_3x3-cam"
+  type: "BN"
   bottom: "conv_3c_3x3-cam"
   top: "conv_3c_3x3-cam"
   param {
@@ -1286,7 +1281,7 @@ layer {
 }
 layer {
   name: "conv_3c_double_3x3_reduce-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -1305,8 +1300,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3c_double_3x3_reduce-cam"
-  type: "BNData"
+  name: "BN_3c_double_3x3_reduce-cam"
+  type: "BN"
   bottom: "conv_3c_double_3x3_reduce-cam"
   top: "conv_3c_double_3x3_reduce-cam"
   param {
@@ -1346,7 +1341,7 @@ layer {
 }
 layer {
   name: "conv_3c_double_3x3_0-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -1365,8 +1360,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3c_double_3x3_0-cam"
-  type: "BNData"
+  name: "BN_3c_double_3x3_0-cam"
+  type: "BN"
   bottom: "conv_3c_double_3x3_0-cam"
   top: "conv_3c_double_3x3_0-cam"
   param {
@@ -1406,7 +1401,7 @@ layer {
 }
 layer {
   name: "conv_3c_double_3x3_1-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -1425,8 +1420,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3c_double_3x3_1-cam"
-  type: "BNData"
+  name: "BN_3c_double_3x3_1-cam"
+  type: "BN"
   bottom: "conv_3c_double_3x3_1-cam"
   top: "conv_3c_double_3x3_1-cam"
   param {
@@ -1486,7 +1481,7 @@ layer {
 }
 layer {
   name: "conv_4a_1x1-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -1505,8 +1500,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4a_1x1-cam"
-  type: "BNData"
+  name: "BN_4a_1x1-cam"
+  type: "BN"
   bottom: "conv_4a_1x1-cam"
   top: "conv_4a_1x1-cam"
   param {
@@ -1546,7 +1541,7 @@ layer {
 }
 layer {
   name: "conv_4a_3x3_reduce-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -1565,8 +1560,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4a_3x3_reduce-cam"
-  type: "BNData"
+  name: "BN_4a_3x3_reduce-cam"
+  type: "BN"
   bottom: "conv_4a_3x3_reduce-cam"
   top: "conv_4a_3x3_reduce-cam"
   param {
@@ -1606,7 +1601,7 @@ layer {
 }
 layer {
   name: "conv_4a_3x3-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -1625,8 +1620,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4a_3x3-cam"
-  type: "BNData"
+  name: "BN_4a_3x3-cam"
+  type: "BN"
   bottom: "conv_4a_3x3-cam"
   top: "conv_4a_3x3-cam"
   param {
@@ -1666,7 +1661,7 @@ layer {
 }
 layer {
   name: "conv_4a_double_3x3_reduce-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -1685,8 +1680,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4a_double_3x3_reduce-cam"
-  type: "BNData"
+  name: "BN_4a_double_3x3_reduce-cam"
+  type: "BN"
   bottom: "conv_4a_double_3x3_reduce-cam"
   top: "conv_4a_double_3x3_reduce-cam"
   param {
@@ -1726,7 +1721,7 @@ layer {
 }
 layer {
   name: "conv_4a_double_3x3_0-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -1745,8 +1740,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4a_double_3x3_0-cam"
-  type: "BNData"
+  name: "BN_4a_double_3x3_0-cam"
+  type: "BN"
   bottom: "conv_4a_double_3x3_0-cam"
   top: "conv_4a_double_3x3_0-cam"
   param {
@@ -1786,7 +1781,7 @@ layer {
 }
 layer {
   name: "conv_4a_double_3x3_1-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -1805,8 +1800,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4a_double_3x3_1-cam"
-  type: "BNData"
+  name: "BN_4a_double_3x3_1-cam"
+  type: "BN"
   bottom: "conv_4a_double_3x3_1-cam"
   top: "conv_4a_double_3x3_1-cam"
   param {
@@ -1858,7 +1853,7 @@ layer {
 }
 layer {
   name: "conv_4a_proj-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -1877,8 +1872,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4a_proj-cam"
-  type: "BNData"
+  name: "BN_4a_proj-cam"
+  type: "BN"
   bottom: "conv_4a_proj-cam"
   top: "conv_4a_proj-cam"
   param {
@@ -1927,7 +1922,7 @@ layer {
 }
 layer {
   name: "conv_4b_1x1-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -1946,8 +1941,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4b_1x1-cam"
-  type: "BNData"
+  name: "BN_4b_1x1-cam"
+  type: "BN"
   bottom: "conv_4b_1x1-cam"
   top: "conv_4b_1x1-cam"
   param {
@@ -1987,7 +1982,7 @@ layer {
 }
 layer {
   name: "conv_4b_3x3_reduce-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -2006,8 +2001,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4b_3x3_reduce-cam"
-  type: "BNData"
+  name: "BN_4b_3x3_reduce-cam"
+  type: "BN"
   bottom: "conv_4b_3x3_reduce-cam"
   top: "conv_4b_3x3_reduce-cam"
   param {
@@ -2047,7 +2042,7 @@ layer {
 }
 layer {
   name: "conv_4b_3x3-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -2066,8 +2061,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4b_3x3-cam"
-  type: "BNData"
+  name: "BN_4b_3x3-cam"
+  type: "BN"
   bottom: "conv_4b_3x3-cam"
   top: "conv_4b_3x3-cam"
   param {
@@ -2107,7 +2102,7 @@ layer {
 }
 layer {
   name: "conv_4b_double_3x3_reduce-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -2126,8 +2121,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4b_double_3x3_reduce-cam"
-  type: "BNData"
+  name: "BN_4b_double_3x3_reduce-cam"
+  type: "BN"
   bottom: "conv_4b_double_3x3_reduce-cam"
   top: "conv_4b_double_3x3_reduce-cam"
   param {
@@ -2167,7 +2162,7 @@ layer {
 }
 layer {
   name: "conv_4b_double_3x3_0-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -2186,8 +2181,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4b_double_3x3_0-cam"
-  type: "BNData"
+  name: "BN_4b_double_3x3_0-cam"
+  type: "BN"
   bottom: "conv_4b_double_3x3_0-cam"
   top: "conv_4b_double_3x3_0-cam"
   param {
@@ -2227,7 +2222,7 @@ layer {
 }
 layer {
   name: "conv_4b_double_3x3_1-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -2246,8 +2241,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4b_double_3x3_1-cam"
-  type: "BNData"
+  name: "BN_4b_double_3x3_1-cam"
+  type: "BN"
   bottom: "conv_4b_double_3x3_1-cam"
   top: "conv_4b_double_3x3_1-cam"
   param {
@@ -2299,7 +2294,7 @@ layer {
 }
 layer {
   name: "conv_4b_proj-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -2318,8 +2313,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4b_proj-cam"
-  type: "BNData"
+  name: "BN_4b_proj-cam"
+  type: "BN"
   bottom: "conv_4b_proj-cam"
   top: "conv_4b_proj-cam"
   param {
@@ -2368,7 +2363,7 @@ layer {
 }
 layer {
   name: "conv_4c_1x1-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -2387,8 +2382,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4c_1x1-cam"
-  type: "BNData"
+  name: "BN_4c_1x1-cam"
+  type: "BN"
   bottom: "conv_4c_1x1-cam"
   top: "conv_4c_1x1-cam"
   param {
@@ -2428,7 +2423,7 @@ layer {
 }
 layer {
   name: "conv_4c_3x3_reduce-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -2447,8 +2442,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4c_3x3_reduce-cam"
-  type: "BNData"
+  name: "BN_4c_3x3_reduce-cam"
+  type: "BN"
   bottom: "conv_4c_3x3_reduce-cam"
   top: "conv_4c_3x3_reduce-cam"
   param {
@@ -2488,7 +2483,7 @@ layer {
 }
 layer {
   name: "conv_4c_3x3-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -2507,8 +2502,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4c_3x3-cam"
-  type: "BNData"
+  name: "BN_4c_3x3-cam"
+  type: "BN"
   bottom: "conv_4c_3x3-cam"
   top: "conv_4c_3x3-cam"
   param {
@@ -2548,7 +2543,7 @@ layer {
 }
 layer {
   name: "conv_4c_double_3x3_reduce-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -2567,8 +2562,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4c_double_3x3_reduce-cam"
-  type: "BNData"
+  name: "BN_4c_double_3x3_reduce-cam"
+  type: "BN"
   bottom: "conv_4c_double_3x3_reduce-cam"
   top: "conv_4c_double_3x3_reduce-cam"
   param {
@@ -2608,7 +2603,7 @@ layer {
 }
 layer {
   name: "conv_4c_double_3x3_0-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -2627,8 +2622,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4c_double_3x3_0-cam"
-  type: "BNData"
+  name: "BN_4c_double_3x3_0-cam"
+  type: "BN"
   bottom: "conv_4c_double_3x3_0-cam"
   top: "conv_4c_double_3x3_0-cam"
   param {
@@ -2668,7 +2663,7 @@ layer {
 }
 layer {
   name: "conv_4c_double_3x3_1-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -2687,8 +2682,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4c_double_3x3_1-cam"
-  type: "BNData"
+  name: "BN_4c_double_3x3_1-cam"
+  type: "BN"
   bottom: "conv_4c_double_3x3_1-cam"
   top: "conv_4c_double_3x3_1-cam"
   param {
@@ -2740,7 +2735,7 @@ layer {
 }
 layer {
   name: "conv_4c_proj-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -2759,8 +2754,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4c_proj-cam"
-  type: "BNData"
+  name: "BN_4c_proj-cam"
+  type: "BN"
   bottom: "conv_4c_proj-cam"
   top: "conv_4c_proj-cam"
   param {
@@ -2809,7 +2804,7 @@ layer {
 }
 layer {
   name: "conv_4d_1x1-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -2828,8 +2823,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4d_1x1-cam"
-  type: "BNData"
+  name: "BN_4d_1x1-cam"
+  type: "BN"
   bottom: "conv_4d_1x1-cam"
   top: "conv_4d_1x1-cam"
   param {
@@ -2869,7 +2864,7 @@ layer {
 }
 layer {
   name: "conv_4d_3x3_reduce-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -2888,8 +2883,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4d_3x3_reduce-cam"
-  type: "BNData"
+  name: "BN_4d_3x3_reduce-cam"
+  type: "BN"
   bottom: "conv_4d_3x3_reduce-cam"
   top: "conv_4d_3x3_reduce-cam"
   param {
@@ -2929,7 +2924,7 @@ layer {
 }
 layer {
   name: "conv_4d_3x3-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_4d_3x3_reduce-cam"
   top: "conv_4d_3x3-cam"
   param {
@@ -2948,8 +2943,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4d_3x3-cam"
-  type: "BNData"
+  name: "BN_4d_3x3-cam"
+  type: "BN"
   bottom: "conv_4d_3x3-cam"
   top: "conv_4d_3x3-cam"
   param {
@@ -2989,7 +2984,7 @@ layer {
 }
 layer {
   name: "conv_4d_double_3x3_reduce-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -3008,8 +3003,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4d_double_3x3_reduce-cam"
-  type: "BNData"
+  name: "BN_4d_double_3x3_reduce-cam"
+  type: "BN"
   bottom: "conv_4d_double_3x3_reduce-cam"
   top: "conv_4d_double_3x3_reduce-cam"
   param {
@@ -3049,7 +3044,7 @@ layer {
 }
 layer {
   name: "conv_4d_double_3x3_0-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -3068,8 +3063,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4d_double_3x3_0-cam"
-  type: "BNData"
+  name: "BN_4d_double_3x3_0-cam"
+  type: "BN"
   bottom: "conv_4d_double_3x3_0-cam"
   top: "conv_4d_double_3x3_0-cam"
   param {
@@ -3109,7 +3104,7 @@ layer {
 }
 layer {
   name: "conv_4d_double_3x3_1-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_4d_double_3x3_0-cam"
   top: "conv_4d_double_3x3_1-cam"
   param {
@@ -3128,8 +3123,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4d_double_3x3_1-cam"
-  type: "BNData"
+  name: "BN_4d_double_3x3_1-cam"
+  type: "BN"
   bottom: "conv_4d_double_3x3_1-cam"
   top: "conv_4d_double_3x3_1-cam"
   param {
@@ -3181,7 +3176,7 @@ layer {
 }
 layer {
   name: "conv_4d_proj-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -3200,8 +3195,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4d_proj-cam"
-  type: "BNData"
+  name: "BN_4d_proj-cam"
+  type: "BN"
   bottom: "conv_4d_proj-cam"
   top: "conv_4d_proj-cam"
   param {
@@ -3250,7 +3245,7 @@ layer {
 }
 layer {
   name: "conv_4e_3x3_reduce-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -3269,8 +3264,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4e_3x3_reduce-cam"
-  type: "BNData"
+  name: "BN_4e_3x3_reduce-cam"
+  type: "BN"
   bottom: "conv_4e_3x3_reduce-cam"
   top: "conv_4e_3x3_reduce-cam"
   param {
@@ -3310,7 +3305,7 @@ layer {
 }
 layer {
   name: "conv_4e_3x3-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_4e_3x3_reduce-cam"
   top: "conv_4e_3x3-cam"
   param {
@@ -3329,8 +3324,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4e_3x3-cam"
-  type: "BNData"
+  name: "BN_4e_3x3-cam"
+  type: "BN"
   bottom: "conv_4e_3x3-cam"
   top: "conv_4e_3x3-cam"
   param {
@@ -3370,7 +3365,7 @@ layer {
 }
 layer {
   name: "conv_4e_double_3x3_reduce-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -3389,8 +3384,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4e_double_3x3_reduce-cam"
-  type: "BNData"
+  name: "BN_4e_double_3x3_reduce-cam"
+  type: "BN"
   bottom: "conv_4e_double_3x3_reduce-cam"
   top: "conv_4e_double_3x3_reduce-cam"
   param {
@@ -3430,7 +3425,7 @@ layer {
 }
 layer {
   name: "conv_4e_double_3x3_0-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -3449,8 +3444,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4e_double_3x3_0-cam"
-  type: "BNData"
+  name: "BN_4e_double_3x3_0-cam"
+  type: "BN"
   bottom: "conv_4e_double_3x3_0-cam"
   top: "conv_4e_double_3x3_0-cam"
   param {
@@ -3490,7 +3485,7 @@ layer {
 }
 layer {
   name: "conv_4e_double_3x3_1-cam"
-  type: "HoleConvolutionData"
+  type: "HoleConvolution"
   bottom: "conv_4e_double_3x3_0-cam"
   top: "conv_4e_double_3x3_1-cam"
   param {
@@ -3510,8 +3505,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4e_double_3x3_1-cam"
-  type: "BNData"
+  name: "BN_4e_double_3x3_1-cam"
+  type: "BN"
   bottom: "conv_4e_double_3x3_1-cam"
   top: "conv_4e_double_3x3_1-cam"
   param {
@@ -3571,7 +3566,7 @@ layer {
 }
 layer {
   name: "conv_5a_1x1-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -3590,8 +3585,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5a_1x1-cam"
-  type: "BNData"
+  name: "BN_5a_1x1-cam"
+  type: "BN"
   bottom: "conv_5a_1x1-cam"
   top: "conv_5a_1x1-cam"
   param {
@@ -3631,7 +3626,7 @@ layer {
 }
 layer {
   name: "conv_5a_3x3_reduce-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -3650,8 +3645,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5a_3x3_reduce-cam"
-  type: "BNData"
+  name: "BN_5a_3x3_reduce-cam"
+  type: "BN"
   bottom: "conv_5a_3x3_reduce-cam"
   top: "conv_5a_3x3_reduce-cam"
   param {
@@ -3691,7 +3686,7 @@ layer {
 }
 layer {
   name: "conv_5a_3x3-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -3710,8 +3705,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5a_3x3-cam"
-  type: "BNData"
+  name: "BN_5a_3x3-cam"
+  type: "BN"
   bottom: "conv_5a_3x3-cam"
   top: "conv_5a_3x3-cam"
   param {
@@ -3751,7 +3746,7 @@ layer {
 }
 layer {
   name: "conv_5a_double_3x3_reduce-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -3770,8 +3765,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5a_double_3x3_reduce-cam"
-  type: "BNData"
+  name: "BN_5a_double_3x3_reduce-cam"
+  type: "BN"
   bottom: "conv_5a_double_3x3_reduce-cam"
   top: "conv_5a_double_3x3_reduce-cam"
   param {
@@ -3811,7 +3806,7 @@ layer {
 }
 layer {
   name: "conv_5a_double_3x3_0-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -3830,8 +3825,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5a_double_3x3_0-cam"
-  type: "BNData"
+  name: "BN_5a_double_3x3_0-cam"
+  type: "BN"
   bottom: "conv_5a_double_3x3_0-cam"
   top: "conv_5a_double_3x3_0-cam"
   param {
@@ -3871,7 +3866,7 @@ layer {
 }
 layer {
   name: "conv_5a_double_3x3_1-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -3890,8 +3885,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5a_double_3x3_1-cam"
-  type: "BNData"
+  name: "BN_5a_double_3x3_1-cam"
+  type: "BN"
   bottom: "conv_5a_double_3x3_1-cam"
   top: "conv_5a_double_3x3_1-cam"
   param {
@@ -3943,7 +3938,7 @@ layer {
 }
 layer {
   name: "conv_5a_proj-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -3962,8 +3957,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5a_proj-cam"
-  type: "BNData"
+  name: "BN_5a_proj-cam"
+  type: "BN"
   bottom: "conv_5a_proj-cam"
   top: "conv_5a_proj-cam"
   param {
@@ -4012,7 +4007,7 @@ layer {
 }
 layer {
   name: "conv_5b_1x1-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -4031,8 +4026,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5b_1x1-cam"
-  type: "BNData"
+  name: "BN_5b_1x1-cam"
+  type: "BN"
   bottom: "conv_5b_1x1-cam"
   top: "conv_5b_1x1-cam"
   param {
@@ -4072,7 +4067,7 @@ layer {
 }
 layer {
   name: "conv_5b_3x3_reduce-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -4091,8 +4086,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5b_3x3_reduce-cam"
-  type: "BNData"
+  name: "BN_5b_3x3_reduce-cam"
+  type: "BN"
   bottom: "conv_5b_3x3_reduce-cam"
   top: "conv_5b_3x3_reduce-cam"
   param {
@@ -4132,7 +4127,7 @@ layer {
 }
 layer {
   name: "conv_5b_3x3-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -4151,8 +4146,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5b_3x3-cam"
-  type: "BNData"
+  name: "BN_5b_3x3-cam"
+  type: "BN"
   bottom: "conv_5b_3x3-cam"
   top: "conv_5b_3x3-cam"
   param {
@@ -4192,7 +4187,7 @@ layer {
 }
 layer {
   name: "conv_5b_double_3x3_reduce-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -4211,8 +4206,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5b_double_3x3_reduce-cam"
-  type: "BNData"
+  name: "BN_5b_double_3x3_reduce-cam"
+  type: "BN"
   bottom: "conv_5b_double_3x3_reduce-cam"
   top: "conv_5b_double_3x3_reduce-cam"
   param {
@@ -4252,7 +4247,7 @@ layer {
 }
 layer {
   name: "conv_5b_double_3x3_0-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -4271,8 +4266,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5b_double_3x3_0-cam"
-  type: "BNData"
+  name: "BN_5b_double_3x3_0-cam"
+  type: "BN"
   bottom: "conv_5b_double_3x3_0-cam"
   top: "conv_5b_double_3x3_0-cam"
   param {
@@ -4312,7 +4307,7 @@ layer {
 }
 layer {
   name: "conv_5b_double_3x3_1-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -4331,8 +4326,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5b_double_3x3_1-cam"
-  type: "BNData"
+  name: "BN_5b_double_3x3_1-cam"
+  type: "BN"
   bottom: "conv_5b_double_3x3_1-cam"
   top: "conv_5b_double_3x3_1-cam"
   param {
@@ -4384,7 +4379,7 @@ layer {
 }
 layer {
   name: "conv_5b_proj-cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -4403,8 +4398,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5b_proj-cam"
-  type: "BNData"
+  name: "BN_5b_proj-cam"
+  type: "BN"
   bottom: "conv_5b_proj-cam"
   top: "conv_5b_proj-cam"
   param {
@@ -4455,7 +4450,7 @@ layer {
   bottom: "ch_concat_5b_chconcat-cam"
   name: "cam"
   top: "cam"
-  type: "ConvolutionData"
+  type: "Convolution"
   convolution_param {
     num_output: 51
     pad_h: 0
@@ -4499,12 +4494,6 @@ layer {
 }
 layer {
   bottom: "global_pool-cam"
-  top: "global_pool_gather-cam"
-  name: "global_pool_gather-cam"
-  type: "Gather"
-}
-layer {
-  bottom: "global_pool_gather-cam"
   top: "classifier"
   name: "classifier-cam"
   type: "InnerProduct"
@@ -4544,7 +4533,7 @@ layer {
 ##### dynamic branch #####
 layer {
   name: "conv_conv1"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "data"
   top: "conv_conv1"
   convolution_param { 
@@ -4556,7 +4545,7 @@ layer {
 }
 layer {
   name: "bn_conv1-1"
-  type: "BNData"
+  type: "BN"
   bottom: "conv_conv1"
   top: "conv_conv1-a"
   param {
@@ -4608,7 +4597,7 @@ layer {
 }
 layer {
   name: "conv_conv2red"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "pool1"
   top: "conv_conv2red"
   convolution_param { 
@@ -4620,7 +4609,7 @@ layer {
 }
 layer {
   name: "bn_conv2red-1"
-  type: "BNData"
+  type: "BN"
   bottom: "conv_conv2red"
   top: "conv_conv2red-2"
   param {
@@ -4660,7 +4649,7 @@ layer {
 }
 layer {
   name: "conv_conv2"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_conv2red-2"
   top: "conv_conv2"
   convolution_param { 
@@ -4672,7 +4661,7 @@ layer {
 }
 layer {
   name: "bn_conv2-1"
-  type: "BNData"
+  type: "BN"
   bottom: "conv_conv2"
   top: "conv_conv2-2"
   param {
@@ -4724,7 +4713,7 @@ layer {
 }
 layer {
   name: "conv_3a_1x1"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "pool2"
   top: "conv_3a_1x1"
   convolution_param { 
@@ -4735,8 +4724,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3a_1x1"
-  type: "BNData"
+  name: "BN_3a_1x1"
+  type: "BN"
   bottom: "conv_3a_1x1"
   top: "conv_3a_1x1"
   param {
@@ -4776,7 +4765,7 @@ layer {
 }
 layer {
   name: "conv_3a_3x3_reduce"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "pool2"
   top: "conv_3a_3x3_reduce"
   convolution_param { 
@@ -4787,8 +4776,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3a_3x3_reduce"
-  type: "BNData"
+  name: "BN_3a_3x3_reduce"
+  type: "BN"
   bottom: "conv_3a_3x3_reduce"
   top: "conv_3a_3x3_reduce"
   param {
@@ -4828,7 +4817,7 @@ layer {
 }
 layer {
   name: "conv_3a_3x3"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_3a_3x3_reduce"
   top: "conv_3a_3x3"
   convolution_param { 
@@ -4839,8 +4828,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3a_3x3"
-  type: "BNData"
+  name: "BN_3a_3x3"
+  type: "BN"
   bottom: "conv_3a_3x3"
   top: "conv_3a_3x3"
   param {
@@ -4880,7 +4869,7 @@ layer {
 }
 layer {
   name: "conv_3a_double_3x3_reduce"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "pool2"
   top: "conv_3a_double_3x3_reduce"
   convolution_param { 
@@ -4891,8 +4880,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3a_double_3x3_reduce"
-  type: "BNData"
+  name: "BN_3a_double_3x3_reduce"
+  type: "BN"
   bottom: "conv_3a_double_3x3_reduce"
   top: "conv_3a_double_3x3_reduce"
   param {
@@ -4932,7 +4921,7 @@ layer {
 }
 layer {
   name: "conv_3a_double_3x3_0"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_3a_double_3x3_reduce"
   top: "conv_3a_double_3x3_0"
   convolution_param { 
@@ -4943,8 +4932,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3a_double_3x3_0"
-  type: "BNData"
+  name: "BN_3a_double_3x3_0"
+  type: "BN"
   bottom: "conv_3a_double_3x3_0"
   top: "conv_3a_double_3x3_0"
   param {
@@ -4984,7 +4973,7 @@ layer {
 }
 layer {
   name: "conv_3a_double_3x3_1"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_3a_double_3x3_0"
   top: "conv_3a_double_3x3_1"
   convolution_param { 
@@ -4995,8 +4984,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3a_double_3x3_1"
-  type: "BNData"
+  name: "BN_3a_double_3x3_1"
+  type: "BN"
   bottom: "conv_3a_double_3x3_1"
   top: "conv_3a_double_3x3_1"
   param {
@@ -5048,7 +5037,7 @@ layer {
 }
 layer {
   name: "conv_3a_proj"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ave_pool_3a_pool"
   top: "conv_3a_proj"
   convolution_param { 
@@ -5059,8 +5048,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3a_proj"
-  type: "BNData"
+  name: "BN_3a_proj"
+  type: "BN"
   bottom: "conv_3a_proj"
   top: "conv_3a_proj"
   param {
@@ -5109,7 +5098,7 @@ layer {
 }
 layer {
   name: "conv_3b_1x1"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ch_concat_3a_chconcat"
   top: "conv_3b_1x1"
   convolution_param { 
@@ -5120,8 +5109,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3b_1x1"
-  type: "BNData"
+  name: "BN_3b_1x1"
+  type: "BN"
   bottom: "conv_3b_1x1"
   top: "conv_3b_1x1"
   param {
@@ -5161,7 +5150,7 @@ layer {
 }
 layer {
   name: "conv_3b_3x3_reduce"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ch_concat_3a_chconcat"
   top: "conv_3b_3x3_reduce"
   convolution_param { 
@@ -5172,8 +5161,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3b_3x3_reduce"
-  type: "BNData"
+  name: "BN_3b_3x3_reduce"
+  type: "BN"
   bottom: "conv_3b_3x3_reduce"
   top: "conv_3b_3x3_reduce"
  param {
@@ -5213,7 +5202,7 @@ layer {
 }
 layer {
   name: "conv_3b_3x3"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_3b_3x3_reduce"
   top: "conv_3b_3x3"
   convolution_param { 
@@ -5224,8 +5213,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3b_3x3"
-  type: "BNData"
+  name: "BN_3b_3x3"
+  type: "BN"
   bottom: "conv_3b_3x3"
   top: "conv_3b_3x3"
   param {
@@ -5265,7 +5254,7 @@ layer {
 }
 layer {
   name: "conv_3b_double_3x3_reduce"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ch_concat_3a_chconcat"
   top: "conv_3b_double_3x3_reduce"
   convolution_param { 
@@ -5276,8 +5265,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3b_double_3x3_reduce"
-  type: "BNData"
+  name: "BN_3b_double_3x3_reduce"
+  type: "BN"
   bottom: "conv_3b_double_3x3_reduce"
   top: "conv_3b_double_3x3_reduce"
   param {
@@ -5317,7 +5306,7 @@ layer {
 }
 layer {
   name: "conv_3b_double_3x3_0"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_3b_double_3x3_reduce"
   top: "conv_3b_double_3x3_0"
   convolution_param { 
@@ -5328,8 +5317,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3b_double_3x3_0"
-  type: "BNData"
+  name: "BN_3b_double_3x3_0"
+  type: "BN"
   bottom: "conv_3b_double_3x3_0"
   top: "conv_3b_double_3x3_0"
   param {
@@ -5369,7 +5358,7 @@ layer {
 }
 layer {
   name: "conv_3b_double_3x3_1"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_3b_double_3x3_0"
   top: "conv_3b_double_3x3_1"
   convolution_param { 
@@ -5380,8 +5369,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3b_double_3x3_1"
-  type: "BNData"
+  name: "BN_3b_double_3x3_1"
+  type: "BN"
   bottom: "conv_3b_double_3x3_1"
   top: "conv_3b_double_3x3_1"
   param {
@@ -5433,7 +5422,7 @@ layer {
 }
 layer {
   name: "conv_3b_proj"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ave_pool_3b_pool"
   top: "conv_3b_proj"
   convolution_param { 
@@ -5444,8 +5433,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3b_proj"
-  type: "BNData"
+  name: "BN_3b_proj"
+  type: "BN"
   bottom: "conv_3b_proj"
   top: "conv_3b_proj"
   param {
@@ -5494,7 +5483,7 @@ layer {
 }
 layer {
   name: "conv_3c_3x3_reduce"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ch_concat_3b_chconcat"
   top: "conv_3c_3x3_reduce"
   convolution_param { 
@@ -5505,8 +5494,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3c_3x3_reduce"
-  type: "BNData"
+  name: "BN_3c_3x3_reduce"
+  type: "BN"
   bottom: "conv_3c_3x3_reduce"
   top: "conv_3c_3x3_reduce"
   param {
@@ -5546,7 +5535,7 @@ layer {
 }
 layer {
   name: "conv_3c_3x3"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_3c_3x3_reduce"
   top: "conv_3c_3x3"
   convolution_param { 
@@ -5557,8 +5546,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3c_3x3"
-  type: "BNData"
+  name: "BN_3c_3x3"
+  type: "BN"
   bottom: "conv_3c_3x3"
   top: "conv_3c_3x3"
   param {
@@ -5598,7 +5587,7 @@ layer {
 }
 layer {
   name: "conv_3c_double_3x3_reduce"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ch_concat_3b_chconcat"
   top: "conv_3c_double_3x3_reduce"
   convolution_param { 
@@ -5609,8 +5598,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3c_double_3x3_reduce"
-  type: "BNData"
+  name: "BN_3c_double_3x3_reduce"
+  type: "BN"
   bottom: "conv_3c_double_3x3_reduce"
   top: "conv_3c_double_3x3_reduce"
   param {
@@ -5650,7 +5639,7 @@ layer {
 }
 layer {
   name: "conv_3c_double_3x3_0"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_3c_double_3x3_reduce"
   top: "conv_3c_double_3x3_0"
   convolution_param { 
@@ -5661,8 +5650,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3c_double_3x3_0"
-  type: "BNData"
+  name: "BN_3c_double_3x3_0"
+  type: "BN"
   bottom: "conv_3c_double_3x3_0"
   top: "conv_3c_double_3x3_0"
   param {
@@ -5702,7 +5691,7 @@ layer {
 }
 layer {
   name: "conv_3c_double_3x3_1"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_3c_double_3x3_0"
   top: "conv_3c_double_3x3_1"
   convolution_param { 
@@ -5713,8 +5702,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_3c_double_3x3_1"
-  type: "BNData"
+  name: "BN_3c_double_3x3_1"
+  type: "BN"
   bottom: "conv_3c_double_3x3_1"
   top: "conv_3c_double_3x3_1"
   param {
@@ -5774,7 +5763,7 @@ layer {
 }
 layer {
   name: "conv_4a_1x1"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ch_concat_3c_chconcat"
   top: "conv_4a_1x1"
   convolution_param { 
@@ -5785,8 +5774,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4a_1x1"
-  type: "BNData"
+  name: "BN_4a_1x1"
+  type: "BN"
   bottom: "conv_4a_1x1"
   top: "conv_4a_1x1"
   param {
@@ -5826,7 +5815,7 @@ layer {
 }
 layer {
   name: "conv_4a_3x3_reduce"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ch_concat_3c_chconcat"
   top: "conv_4a_3x3_reduce"
   convolution_param { 
@@ -5837,8 +5826,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4a_3x3_reduce"
-  type: "BNData"
+  name: "BN_4a_3x3_reduce"
+  type: "BN"
   bottom: "conv_4a_3x3_reduce"
   top: "conv_4a_3x3_reduce"
   param {
@@ -5878,7 +5867,7 @@ layer {
 }
 layer {
   name: "conv_4a_3x3"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_4a_3x3_reduce"
   top: "conv_4a_3x3"
   convolution_param { 
@@ -5889,8 +5878,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4a_3x3"
-  type: "BNData"
+  name: "BN_4a_3x3"
+  type: "BN"
   bottom: "conv_4a_3x3"
   top: "conv_4a_3x3"
   param {
@@ -5930,7 +5919,7 @@ layer {
 }
 layer {
   name: "conv_4a_double_3x3_reduce"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ch_concat_3c_chconcat"
   top: "conv_4a_double_3x3_reduce"
   convolution_param { 
@@ -5941,8 +5930,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4a_double_3x3_reduce"
-  type: "BNData"
+  name: "BN_4a_double_3x3_reduce"
+  type: "BN"
   bottom: "conv_4a_double_3x3_reduce"
   top: "conv_4a_double_3x3_reduce"
   param {
@@ -5982,7 +5971,7 @@ layer {
 }
 layer {
   name: "conv_4a_double_3x3_0"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_4a_double_3x3_reduce"
   top: "conv_4a_double_3x3_0"
   convolution_param { 
@@ -5993,8 +5982,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4a_double_3x3_0"
-  type: "BNData"
+  name: "BN_4a_double_3x3_0"
+  type: "BN"
   bottom: "conv_4a_double_3x3_0"
   top: "conv_4a_double_3x3_0"
   param {
@@ -6034,7 +6023,7 @@ layer {
 }
 layer {
   name: "conv_4a_double_3x3_1"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_4a_double_3x3_0"
   top: "conv_4a_double_3x3_1"
   convolution_param { 
@@ -6045,8 +6034,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4a_double_3x3_1"
-  type: "BNData"
+  name: "BN_4a_double_3x3_1"
+  type: "BN"
   bottom: "conv_4a_double_3x3_1"
   top: "conv_4a_double_3x3_1"
   param {
@@ -6098,7 +6087,7 @@ layer {
 }
 layer {
   name: "conv_4a_proj"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ave_pool_4a_pool"
   top: "conv_4a_proj"
   convolution_param { 
@@ -6109,8 +6098,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4a_proj"
-  type: "BNData"
+  name: "BN_4a_proj"
+  type: "BN"
   bottom: "conv_4a_proj"
   top: "conv_4a_proj"
   param {
@@ -6159,7 +6148,7 @@ layer {
 }
 layer {
   name: "conv_4b_1x1"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ch_concat_4a_chconcat"
   top: "conv_4b_1x1"
   convolution_param { 
@@ -6170,8 +6159,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4b_1x1"
-  type: "BNData"
+  name: "BN_4b_1x1"
+  type: "BN"
   bottom: "conv_4b_1x1"
   top: "conv_4b_1x1"
   param {
@@ -6211,7 +6200,7 @@ layer {
 }
 layer {
   name: "conv_4b_3x3_reduce"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ch_concat_4a_chconcat"
   top: "conv_4b_3x3_reduce"
   convolution_param { 
@@ -6222,8 +6211,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4b_3x3_reduce"
-  type: "BNData"
+  name: "BN_4b_3x3_reduce"
+  type: "BN"
   bottom: "conv_4b_3x3_reduce"
   top: "conv_4b_3x3_reduce"
   param {
@@ -6263,7 +6252,7 @@ layer {
 }
 layer {
   name: "conv_4b_3x3"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_4b_3x3_reduce"
   top: "conv_4b_3x3"
   convolution_param { 
@@ -6274,8 +6263,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4b_3x3"
-  type: "BNData"
+  name: "BN_4b_3x3"
+  type: "BN"
   bottom: "conv_4b_3x3"
   top: "conv_4b_3x3"
   param {
@@ -6315,7 +6304,7 @@ layer {
 }
 layer {
   name: "conv_4b_double_3x3_reduce"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ch_concat_4a_chconcat"
   top: "conv_4b_double_3x3_reduce"
   convolution_param { 
@@ -6326,8 +6315,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4b_double_3x3_reduce"
-  type: "BNData"
+  name: "BN_4b_double_3x3_reduce"
+  type: "BN"
   bottom: "conv_4b_double_3x3_reduce"
   top: "conv_4b_double_3x3_reduce"
   param {
@@ -6367,7 +6356,7 @@ layer {
 }
 layer {
   name: "conv_4b_double_3x3_0"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_4b_double_3x3_reduce"
   top: "conv_4b_double_3x3_0"
   convolution_param { 
@@ -6378,8 +6367,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4b_double_3x3_0"
-  type: "BNData"
+  name: "BN_4b_double_3x3_0"
+  type: "BN"
   bottom: "conv_4b_double_3x3_0"
   top: "conv_4b_double_3x3_0"
   param {
@@ -6419,7 +6408,7 @@ layer {
 }
 layer {
   name: "conv_4b_double_3x3_1"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_4b_double_3x3_0"
   top: "conv_4b_double_3x3_1"
   convolution_param { 
@@ -6430,8 +6419,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4b_double_3x3_1"
-  type: "BNData"
+  name: "BN_4b_double_3x3_1"
+  type: "BN"
   bottom: "conv_4b_double_3x3_1"
   top: "conv_4b_double_3x3_1"
   param {
@@ -6483,7 +6472,7 @@ layer {
 }
 layer {
   name: "conv_4b_proj"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ave_pool_4b_pool"
   top: "conv_4b_proj"
   convolution_param { 
@@ -6494,8 +6483,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4b_proj"
-  type: "BNData"
+  name: "BN_4b_proj"
+  type: "BN"
   bottom: "conv_4b_proj"
   top: "conv_4b_proj"
   param {
@@ -6544,7 +6533,7 @@ layer {
 }
 layer {
   name: "conv_4c_1x1"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ch_concat_4b_chconcat"
   top: "conv_4c_1x1"
   convolution_param { 
@@ -6555,8 +6544,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4c_1x1"
-  type: "BNData"
+  name: "BN_4c_1x1"
+  type: "BN"
   bottom: "conv_4c_1x1"
   top: "conv_4c_1x1"
   param {
@@ -6596,7 +6585,7 @@ layer {
 }
 layer {
   name: "conv_4c_3x3_reduce"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ch_concat_4b_chconcat"
   top: "conv_4c_3x3_reduce"
   convolution_param { 
@@ -6607,8 +6596,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4c_3x3_reduce"
-  type: "BNData"
+  name: "BN_4c_3x3_reduce"
+  type: "BN"
   bottom: "conv_4c_3x3_reduce"
   top: "conv_4c_3x3_reduce"
   param {
@@ -6648,7 +6637,7 @@ layer {
 }
 layer {
   name: "conv_4c_3x3"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_4c_3x3_reduce"
   top: "conv_4c_3x3"
   convolution_param { 
@@ -6659,8 +6648,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4c_3x3"
-  type: "BNData"
+  name: "BN_4c_3x3"
+  type: "BN"
   bottom: "conv_4c_3x3"
   top: "conv_4c_3x3"
   param {
@@ -6700,7 +6689,7 @@ layer {
 }
 layer {
   name: "conv_4c_double_3x3_reduce"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ch_concat_4b_chconcat"
   top: "conv_4c_double_3x3_reduce"
   convolution_param { 
@@ -6711,8 +6700,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4c_double_3x3_reduce"
-  type: "BNData"
+  name: "BN_4c_double_3x3_reduce"
+  type: "BN"
   bottom: "conv_4c_double_3x3_reduce"
   top: "conv_4c_double_3x3_reduce"
   param {
@@ -6752,7 +6741,7 @@ layer {
 }
 layer {
   name: "conv_4c_double_3x3_0"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_4c_double_3x3_reduce"
   top: "conv_4c_double_3x3_0"
   convolution_param { 
@@ -6763,8 +6752,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4c_double_3x3_0"
-  type: "BNData"
+  name: "BN_4c_double_3x3_0"
+  type: "BN"
   bottom: "conv_4c_double_3x3_0"
   top: "conv_4c_double_3x3_0"
   param {
@@ -6804,7 +6793,7 @@ layer {
 }
 layer {
   name: "conv_4c_double_3x3_1"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_4c_double_3x3_0"
   top: "conv_4c_double_3x3_1"
   convolution_param { 
@@ -6815,8 +6804,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4c_double_3x3_1"
-  type: "BNData"
+  name: "BN_4c_double_3x3_1"
+  type: "BN"
   bottom: "conv_4c_double_3x3_1"
   top: "conv_4c_double_3x3_1"
   param {
@@ -6868,7 +6857,7 @@ layer {
 }
 layer {
   name: "conv_4c_proj"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ave_pool_4c_pool"
   top: "conv_4c_proj"
   convolution_param { 
@@ -6879,8 +6868,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4c_proj"
-  type: "BNData"
+  name: "BN_4c_proj"
+  type: "BN"
   bottom: "conv_4c_proj"
   top: "conv_4c_proj"
   param {
@@ -6929,7 +6918,7 @@ layer {
 }
 layer {
   name: "conv_4d_1x1"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ch_concat_4c_chconcat"
   top: "conv_4d_1x1"
   convolution_param { 
@@ -6940,8 +6929,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4d_1x1"
-  type: "BNData"
+  name: "BN_4d_1x1"
+  type: "BN"
   bottom: "conv_4d_1x1"
   top: "conv_4d_1x1"
   param {
@@ -6981,7 +6970,7 @@ layer {
 }
 layer {
   name: "conv_4d_3x3_reduce"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ch_concat_4c_chconcat"
   top: "conv_4d_3x3_reduce"
   convolution_param { 
@@ -6992,8 +6981,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4d_3x3_reduce"
-  type: "BNData"
+  name: "BN_4d_3x3_reduce"
+  type: "BN"
   bottom: "conv_4d_3x3_reduce"
   top: "conv_4d_3x3_reduce"
   param {
@@ -7033,7 +7022,7 @@ layer {
 }
 layer {
   name: "conv_4d_3x3"
-  type: "HoleConvolutionData"
+  type: "HoleConvolution"
   bottom: "conv_4d_3x3_reduce"
   top: "conv_4d_3x3"
   convolution_param { 
@@ -7045,8 +7034,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4d_3x3"
-  type: "BNData"
+  name: "BN_4d_3x3"
+  type: "BN"
   bottom: "conv_4d_3x3"
   top: "conv_4d_3x3"
   param {
@@ -7086,7 +7075,7 @@ layer {
 }
 layer {
   name: "conv_4d_double_3x3_reduce"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ch_concat_4c_chconcat"
   top: "conv_4d_double_3x3_reduce"
   convolution_param { 
@@ -7097,8 +7086,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4d_double_3x3_reduce"
-  type: "BNData"
+  name: "BN_4d_double_3x3_reduce"
+  type: "BN"
   bottom: "conv_4d_double_3x3_reduce"
   top: "conv_4d_double_3x3_reduce"
   param {
@@ -7138,7 +7127,7 @@ layer {
 }
 layer {
   name: "conv_4d_double_3x3_0"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_4d_double_3x3_reduce"
   top: "conv_4d_double_3x3_0"
   convolution_param { 
@@ -7149,8 +7138,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4d_double_3x3_0"
-  type: "BNData"
+  name: "BN_4d_double_3x3_0"
+  type: "BN"
   bottom: "conv_4d_double_3x3_0"
   top: "conv_4d_double_3x3_0"
   param {
@@ -7190,7 +7179,7 @@ layer {
 }
 layer {
   name: "conv_4d_double_3x3_1"
-  type: "HoleConvolutionData"
+  type: "HoleConvolution"
   bottom: "conv_4d_double_3x3_0"
   top: "conv_4d_double_3x3_1"
   convolution_param { 
@@ -7202,8 +7191,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4d_double_3x3_1"
-  type: "BNData"
+  name: "BN_4d_double_3x3_1"
+  type: "BN"
   bottom: "conv_4d_double_3x3_1"
   top: "conv_4d_double_3x3_1"
   param {
@@ -7255,7 +7244,7 @@ layer {
 }
 layer {
   name: "conv_4d_proj"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ave_pool_4d_pool"
   top: "conv_4d_proj"
   convolution_param { 
@@ -7266,8 +7255,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4d_proj"
-  type: "BNData"
+  name: "BN_4d_proj"
+  type: "BN"
   bottom: "conv_4d_proj"
   top: "conv_4d_proj"
   param {
@@ -7316,7 +7305,7 @@ layer {
 }
 layer {
   name: "conv_4e_3x3_reduce"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ch_concat_4d_chconcat"
   top: "conv_4e_3x3_reduce"
   convolution_param { 
@@ -7327,8 +7316,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4e_3x3_reduce"
-  type: "BNData"
+  name: "BN_4e_3x3_reduce"
+  type: "BN"
   bottom: "conv_4e_3x3_reduce"
   top: "conv_4e_3x3_reduce"
   param {
@@ -7368,7 +7357,7 @@ layer {
 }
 layer {
   name: "conv_4e_3x3"
-  type: "HoleConvolutionData"
+  type: "HoleConvolution"
   bottom: "conv_4e_3x3_reduce"
   top: "conv_4e_3x3"
   convolution_param { 
@@ -7380,8 +7369,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4e_3x3"
-  type: "BNData"
+  name: "BN_4e_3x3"
+  type: "BN"
   bottom: "conv_4e_3x3"
   top: "conv_4e_3x3"
   param {
@@ -7421,7 +7410,7 @@ layer {
 }
 layer {
   name: "conv_4e_double_3x3_reduce"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ch_concat_4d_chconcat"
   top: "conv_4e_double_3x3_reduce"
   convolution_param { 
@@ -7432,8 +7421,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4e_double_3x3_reduce"
-  type: "BNData"
+  name: "BN_4e_double_3x3_reduce"
+  type: "BN"
   bottom: "conv_4e_double_3x3_reduce"
   top: "conv_4e_double_3x3_reduce"
   param {
@@ -7473,7 +7462,7 @@ layer {
 }
 layer {
   name: "conv_4e_double_3x3_0"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_4e_double_3x3_reduce"
   top: "conv_4e_double_3x3_0"
   convolution_param { 
@@ -7484,8 +7473,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4e_double_3x3_0"
-  type: "BNData"
+  name: "BN_4e_double_3x3_0"
+  type: "BN"
   bottom: "conv_4e_double_3x3_0"
   top: "conv_4e_double_3x3_0"
   param {
@@ -7525,7 +7514,7 @@ layer {
 }
 layer {
   name: "conv_4e_double_3x3_1"
-  type: "HoleConvolutionData"
+  type: "HoleConvolution"
   bottom: "conv_4e_double_3x3_0"
   top: "conv_4e_double_3x3_1"
   convolution_param { 
@@ -7537,8 +7526,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_4e_double_3x3_1"
-  type: "BNData"
+  name: "BN_4e_double_3x3_1"
+  type: "BN"
   bottom: "conv_4e_double_3x3_1"
   top: "conv_4e_double_3x3_1"
   param {
@@ -7598,7 +7587,7 @@ layer {
 }
 layer {
   name: "conv_5a_1x1"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ch_concat_4e_chconcat"
   top: "conv_5a_1x1"
   convolution_param { 
@@ -7609,8 +7598,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5a_1x1"
-  type: "BNData"
+  name: "BN_5a_1x1"
+  type: "BN"
   bottom: "conv_5a_1x1"
   top: "conv_5a_1x1"
   param {
@@ -7650,7 +7639,7 @@ layer {
 }
 layer {
   name: "conv_5a_3x3_reduce"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ch_concat_4e_chconcat"
   top: "conv_5a_3x3_reduce"
   convolution_param { 
@@ -7661,8 +7650,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5a_3x3_reduce"
-  type: "BNData"
+  name: "BN_5a_3x3_reduce"
+  type: "BN"
   bottom: "conv_5a_3x3_reduce"
   top: "conv_5a_3x3_reduce"
   param {
@@ -7702,7 +7691,7 @@ layer {
 }
 layer {
   name: "conv_5a_3x3"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_5a_3x3_reduce"
   top: "conv_5a_3x3"
   convolution_param { 
@@ -7713,8 +7702,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5a_3x3"
-  type: "BNData"
+  name: "BN_5a_3x3"
+  type: "BN"
   bottom: "conv_5a_3x3"
   top: "conv_5a_3x3"
   param {
@@ -7754,7 +7743,7 @@ layer {
 }
 layer {
   name: "conv_5a_double_3x3_reduce"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ch_concat_4e_chconcat"
   top: "conv_5a_double_3x3_reduce"
   convolution_param { 
@@ -7765,8 +7754,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5a_double_3x3_reduce"
-  type: "BNData"
+  name: "BN_5a_double_3x3_reduce"
+  type: "BN"
   bottom: "conv_5a_double_3x3_reduce"
   top: "conv_5a_double_3x3_reduce"
   param {
@@ -7806,7 +7795,7 @@ layer {
 }
 layer {
   name: "conv_5a_double_3x3_0"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_5a_double_3x3_reduce"
   top: "conv_5a_double_3x3_0"
   convolution_param { 
@@ -7817,8 +7806,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5a_double_3x3_0"
-  type: "BNData"
+  name: "BN_5a_double_3x3_0"
+  type: "BN"
   bottom: "conv_5a_double_3x3_0"
   top: "conv_5a_double_3x3_0"
   param {
@@ -7858,7 +7847,7 @@ layer {
 }
 layer {
   name: "conv_5a_double_3x3_1"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_5a_double_3x3_0"
   top: "conv_5a_double_3x3_1"
   convolution_param { 
@@ -7869,8 +7858,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5a_double_3x3_1"
-  type: "BNData"
+  name: "BN_5a_double_3x3_1"
+  type: "BN"
   bottom: "conv_5a_double_3x3_1"
   top: "conv_5a_double_3x3_1"
   param {
@@ -7922,7 +7911,7 @@ layer {
 }
 layer {
   name: "conv_5a_proj"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "ave_pool_5a_pool"
   top: "conv_5a_proj"
   convolution_param { 
@@ -7933,8 +7922,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5a_proj"
-  type: "BNData"
+  name: "BN_5a_proj"
+  type: "BN"
   bottom: "conv_5a_proj"
   top: "conv_5a_proj"
   param {
@@ -7995,7 +7984,7 @@ layer {
 }
 layer {
   name: "conv_5b_1x1"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "roi_pooling"
   top: "conv_5b_1x1"
   convolution_param { 
@@ -8006,8 +7995,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5b_1x1"
-  type: "BNData"
+  name: "BN_5b_1x1"
+  type: "BN"
   bottom: "conv_5b_1x1"
   top: "conv_5b_1x1"
   param {
@@ -8047,7 +8036,7 @@ layer {
 }
 layer {
   name: "conv_5b_3x3_reduce"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "roi_pooling"
   top: "conv_5b_3x3_reduce"
   convolution_param { 
@@ -8058,8 +8047,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5b_3x3_reduce"
-  type: "BNData"
+  name: "BN_5b_3x3_reduce"
+  type: "BN"
   bottom: "conv_5b_3x3_reduce"
   top: "conv_5b_3x3_reduce"
   param {
@@ -8099,7 +8088,7 @@ layer {
 }
 layer {
   name: "conv_5b_3x3"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_5b_3x3_reduce"
   top: "conv_5b_3x3"
   convolution_param { 
@@ -8110,8 +8099,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5b_3x3"
-  type: "BNData"
+  name: "BN_5b_3x3"
+  type: "BN"
   bottom: "conv_5b_3x3"
   top: "conv_5b_3x3"
   param {
@@ -8151,7 +8140,7 @@ layer {
 }
 layer {
   name: "conv_5b_double_3x3_reduce"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "roi_pooling"
   top: "conv_5b_double_3x3_reduce"
   convolution_param { 
@@ -8162,8 +8151,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5b_double_3x3_reduce"
-  type: "BNData"
+  name: "BN_5b_double_3x3_reduce"
+  type: "BN"
   bottom: "conv_5b_double_3x3_reduce"
   top: "conv_5b_double_3x3_reduce"
   param {
@@ -8203,7 +8192,7 @@ layer {
 }
 layer {
   name: "conv_5b_double_3x3_0"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_5b_double_3x3_reduce"
   top: "conv_5b_double_3x3_0"
   convolution_param { 
@@ -8214,8 +8203,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5b_double_3x3_0"
-  type: "BNData"
+  name: "BN_5b_double_3x3_0"
+  type: "BN"
   bottom: "conv_5b_double_3x3_0"
   top: "conv_5b_double_3x3_0"
   param {
@@ -8255,7 +8244,7 @@ layer {
 }
 layer {
   name: "conv_5b_double_3x3_1"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "conv_5b_double_3x3_0"
   top: "conv_5b_double_3x3_1"
   convolution_param { 
@@ -8266,8 +8255,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5b_double_3x3_1"
-  type: "BNData"
+  name: "BN_5b_double_3x3_1"
+  type: "BN"
   bottom: "conv_5b_double_3x3_1"
   top: "conv_5b_double_3x3_1"
   param {
@@ -8319,7 +8308,7 @@ layer {
 }
 layer {
   name: "conv_5b_proj"
-  type: "ConvolutionData"
+  type: "Convolution"
   bottom: "max_pool_5b_pool"
   top: "conv_5b_proj"
   convolution_param { 
@@ -8330,8 +8319,8 @@ layer {
   }
 }
 layer {
-  name: "bndata_5b_proj"
-  type: "BNData"
+  name: "BN_5b_proj"
+  type: "BN"
   bottom: "conv_5b_proj"
   top: "conv_5b_proj"
   param {
@@ -8516,14 +8505,8 @@ layer {
   }
 }
 layer {
-  name: "local_vector_gather"
-  top: "local_vector_gather"
-  bottom: "local_vector_reshape"
-  type: "Gather"
-}
-layer {
   name: "local_vector"
-  bottom: "local_vector_gather"
+  bottom: "local_vector_reshape"
   top: "local_vector"
   type: "Convolution"
   param {
@@ -8563,7 +8546,7 @@ layer {
   name: "loss"
   top: "loss"
   bottom: "image_classifier"
-  bottom: "labels_gather"
+  bottom: "labels"
   type: "SigmoidCrossEntropyWeightLoss"
   loss_weight: 1
   sigmoid_cross_entropy_weight_loss_param {
