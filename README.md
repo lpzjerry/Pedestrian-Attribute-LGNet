@@ -1,6 +1,8 @@
 # Pedestrian-Attribute-LGNet
 Source code for paper "Localization Guided Learning for Pedestrian Attribute Recognition".<br>
-Accepted by [British Machine Vision Conference (BMVC), 2018](http://bmvc2018.org/).
+Accepted by [British Machine Vision Conference (BMVC), 2018](http://bmvc2018.org/).<br>
+### Authors
+**Pengze Liu**, [Xihui Liu](https://xh-liu.github.io/), [Junjie Yan](http://www.cbsr.ia.ac.cn/users/jjyan/main.htm), [Jing Shao](https://amandajshao.github.io/)
 
 **[PDF](http://bmvc2018.org/contents/papers/0573.pdf)**
 
